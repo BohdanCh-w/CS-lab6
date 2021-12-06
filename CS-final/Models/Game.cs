@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 namespace CS_final.Models {
     public class Game {
         [Key]
-        public long GameID { get; set; }
+        public long GameId { get; set; }
 
-        public int CustomerID { get; set; }
+        public long CustomerId { get; set; }
         public Customer Customer { get; set; }
 
-        public int LocationID { get; set; }
+        public long LocationId { get; set; }
         public Location Location { get; set; }
 
         public int PlayersCount { get; set; }

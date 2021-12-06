@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 namespace CS_final.Models {
     public class EquipmentUsage {
         [Key]
-        public long EquipmentUsageID { get; set; }
+        public long EquipmentUsageId { get; set; }
 
-        public int GameID { get; set; }
+        public long GameId { get; set; }
 
-        public int EquipmentID { get; set; }
+        public long EquipmentId { get; set; }
         public Equipment Equipment { get; set; }
 
         public int Number { get; set; }

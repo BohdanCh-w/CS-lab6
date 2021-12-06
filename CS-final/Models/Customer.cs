@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace CS_final.Models {
     public class Customer {
         [Key]
-        public long CustomerID { get; set; }
+        public long CustomerId { get; set; }
         
         [Column(TypeName="nvarchar(100)")]
         public string Full_name { get; set; }
