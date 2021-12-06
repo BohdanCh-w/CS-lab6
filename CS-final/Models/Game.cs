@@ -17,5 +17,7 @@ namespace CS_final.Models {
         public Location Location { get; set; }
 
         public int PlayersCount { get; set; }
+
+        public List<EquipmentUsage> EquipmentUsages { get; set; }
     }
 }

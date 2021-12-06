@@ -11,7 +11,6 @@ namespace CS_final.Models {
         public long EquipmentUsageID { get; set; }
 
         public int GameID { get; set; }
-        public Game Game { get; set; }
 
         public int EquipmentID { get; set; }
         public Equipment Equipment { get; set; }
