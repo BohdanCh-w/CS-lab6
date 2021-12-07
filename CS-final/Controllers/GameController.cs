@@ -32,46 +32,38 @@ namespace CS_final.Controllers {
             return game;
         }
 
-        // // PUT: api/Game/5
-        // // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        // [HttpPut("{id}")]
-        // public async Task<IActionResult> PutGame(long id, Game game) {
-        //     if (id != game.GameId) {
-        //         return BadRequest();
-        //     }
+        // PUT: api/Game/5
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutGame(long id, Game game) {
+            if (id != game.GameId) {
+                return BadRequest();
+            }
 
-        //     _context.Entry(game).State = EntityState.Modified;
+            _context.Entry(game).State = EntityState.Modified;
 
-        //     foreach (EquipmentUsage item in game.EquipmentUsages) {
-        //         if (item.EquipmentUsageId == 0)
-        //             _context.EquipmentUsages.Add(item);
-        //         else
-        //             _context.Entry(item).State = EntityState.Modified;
-        //     }
+            foreach (EquipmentUsage item in game.EquipmentUsages) {
+                if (item.EquipmentUsageId == 0) {
+                    _context.EquipmentUsages.Add(item);
+                } else {
+                    _context.Entry(item).State = EntityState.Modified;
+                }
+            }
 
-        //     foreach (var i in game.DeletedOrderItemIds.Split(',').Where(x => x !="")) {
-        //         OrderDetail y = _context.OrderDetails.Find(Convert.ToInt64(i));
-        //         _context.OrderDetails.Remove(y);
-        //     }
+            try {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException) {
+                if (!GameExists(id)) {
+                    return NotFound();
+                }
+                else {
+                    throw;
+                }
+            }
 
-        //     try
-        //     {
-        //         await _context.SaveChangesAsync();
-        //     }
-        //     catch (DbUpdateConcurrencyException)
-        //     {
-        //         if (!OrderMasterExists(id))
-        //         {
-        //             return NotFound();
-        //         }
-        //         else
-        //         {
-        //             throw;
-        //         }
-        //     }
-
-        //     return NoContent();
-        // }
+            return NoContent();
+        }
 
         // POST: api/Order
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
