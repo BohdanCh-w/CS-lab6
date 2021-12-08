@@ -5,9 +5,26 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #131313;
+  color: #ffffff
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.MuiFormLabel-root {
+  color: rgba(255, 255, 255, 0.54) !important;
+}
+
+.MuiInputBase-input {
+  color: rgba(200, 200, 200, 1) !important;
+}
+
+.MuiOutlinedInput-notchedOutline {
+    border-color: rgb(255 255 255 / 42%) !important;
+}
+.MuiOutlinedInput-root.Mui-disabled .MuiOutlinedInput-notchedOutline {
+    border-color: rgb(255 255 255 / 15%) !important;
 }

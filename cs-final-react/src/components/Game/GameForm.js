@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Grid, makeStyles } from '@material-ui/core'
 import Form from "../../layouts/Form"
 import { Input, Select, Button } from '../../controls'
+import { ENDPOINTS, createAPIEndpoint } from "../../api";
 
 const useStyles = makeStyles(theme => ({
     buttons: {
@@ -10,13 +11,21 @@ const useStyles = makeStyles(theme => ({
         backgroundImage: "linear-gradient(61deg, #000000 12.82%, #ffee00 12.82%, #ffee00 25.64%, #000000 25.64%, #000000 30.77%, #ffee00 30.77%, #ffee00 50%, #000000 50%, #000000 62.82%, #ffee00 62.82%, #ffee00 75.64%, #000000 75.64%, #000000 80.77%, #ffee00 80.77%, #ffee00 100%);",
         backgroundSize: "78.00px 140.72px",
         width: '42%',
+        boxShadow: "0px 0px 5px #ffffff",
+        "&:hover": {
+            boxShadow: "0px 0px 12px #ffffff"
+        }
     },
     listGamesButton: {
         color: '#ffffff',
         textShadow: "0px 0px 3px #000000",
         backgroundImage: "linear-gradient(61deg, #000000 12.82%, #ffee00 12.82%, #ffee00 25.64%, #000000 25.64%, #000000 30.77%, #ffee00 30.77%, #ffee00 50%, #000000 50%, #000000 62.82%, #ffee00 62.82%, #ffee00 75.64%, #000000 75.64%, #000000 80.77%, #ffee00 80.77%, #ffee00 100%);",
         backgroundSize: "78.00px 140.72px",
-        width: '90%'
+        width: '90%',
+        boxShadow: "0px 0px 5px #ffffff",
+        "&:hover": {
+            boxShadow: "0px 0px 12px #ffffff"
+        }
     }
 }))
 
@@ -24,6 +33,31 @@ export default function GameForm(props) {
 
     const { values, errors, onInputChanged } = props;
     const classes = useStyles();
+
+    const [customerList, setCustomerList] = useState([])
+    const [locationList, setLocationList] = useState([])
+    useEffect(() => {
+        createAPIEndpoint(ENDPOINTS.CUSTOMER).fetchAll()
+            .then(res => {
+                let customerList = res.data.map(item => ({
+                    id: item.customerId,
+                    title: item.full_name
+                }))
+                customerList = [{ id: 0, title: 'Select' }].concat(customerList);
+                setCustomerList(customerList);
+            }).catch(err => console.error(err))
+    }, [])
+    useEffect(() => {
+        createAPIEndpoint(ENDPOINTS.LOCATION).fetchAll()
+            .then(res => {
+                let locationList = res.data.map(item => ({
+                    id: item.locationId,
+                    title: item.name
+                }))
+                locationList = [{ id: 0, title: 'Select' }].concat(locationList);
+                setLocationList(locationList);
+            }).catch(err => console.error(err))
+    }, [])
 
     return (
         <Form>
@@ -34,11 +68,7 @@ export default function GameForm(props) {
                         name="customerId"
                         value={values.customerId}
                         onChange={onInputChanged}
-                        options={[
-                            { id: 0, title: 'Select' },
-                            { id: 1, title: 'Customer 1 ' },
-                            { id: 2, title: 'Customer 2 ' }
-                        ]}
+                        options={customerList}
                     />
                 </Grid>
                 <Grid item xs={4}>
@@ -47,11 +77,7 @@ export default function GameForm(props) {
                         name="locationId"
                         value={values.locationId}
                         onChange={onInputChanged}
-                        options={[
-                            { id: 0, title: 'Select' },
-                            { id: 1, title: 'Loc 1 ' },
-                            { id: 2, title: 'Loc 2 ' }
-                        ]}
+                        options={locationList}
                     />
                 </Grid>
                 <Grid item xs={4}>
