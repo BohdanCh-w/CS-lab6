@@ -31,7 +31,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function GameForm(props) {
 
-    const { values, errors, onInputChanged } = props;
+    const { values, errors, onInputChanged, resetFormControls } = props;
     const classes = useStyles();
 
     const [customerList, setCustomerList] = useState([])
@@ -59,8 +59,16 @@ export default function GameForm(props) {
             }).catch(err => console.error(err))
     }, [])
 
+    const submitGame = e => {
+        e.preventDefault();
+        createAPIEndpoint(ENDPOINTS.GAME).create(values)
+            .then(res => {
+                resetFormControls();
+            }).catch(err => console.error(err))
+    }
+
     return (
-        <Form>
+        <Form onSubmit={submitGame}>
             <Grid container spacing={2}>
                 <Grid item xs={4}>
                     <Select

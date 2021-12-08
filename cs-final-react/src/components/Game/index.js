@@ -1,6 +1,9 @@
 import React from 'react';
 import GameForm from './GameForm'
+import EquipmentUsed from './EquipmentUsed'
+import SearchEquipment from './SearchEquipment'
 import { useForm } from '../../hooks/useForm'
+import { Grid, makeStyles } from '@material-ui/core'
 
 const newGameObject = () => ({
     gameId: 0,
@@ -8,7 +11,7 @@ const newGameObject = () => ({
     locationId: 0,
     fullValue: 0,
     pCount: 0,
-    equipmentUsage: []
+    equipmentUsages: []
 });
 
 export default function Game() {
@@ -23,8 +26,28 @@ export default function Game() {
     } = useForm(newGameObject);
 
     return (
-        <GameForm
-            {...{ values, errors, onInputChanged }}
-        />
+        <Grid container spacing={2}>
+            <Grid item xs={12}>
+                <GameForm
+                    {...{ values, errors, onInputChanged, resetFormControls }}
+                />
+            </Grid>
+            <Grid item xs={6}>
+                <SearchEquipment
+                    {...{
+                        values,
+                        setValues
+                    }}
+                />
+            </Grid>
+            <Grid item xs={6}>
+                <EquipmentUsed
+                    {...{
+                        values,
+                        setValues
+                    }}
+                />
+            </Grid>
+        </Grid>
     )
 }
