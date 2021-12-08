@@ -1,0 +1,50 @@
+body {
+  margin: 0;
+  font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #131313;
+  color: #ffffff
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.MuiFormLabel-root {
+  color: rgba(255, 255, 255, 0.54) !important;
+}
+
+.MuiTypography-colorTextSecondary {
+  color: rgba(160, 160, 160, 1) !important;
+}
+
+.MuiInputBase-input {
+  color: rgba(150, 150, 150, 1) !important;
+}
+
+.MuiOutlinedInput-notchedOutline {
+    border-color: rgb(255 255 255 / 42%) !important;
+}
+.MuiOutlinedInput-root.Mui-disabled .MuiOutlinedInput-notchedOutline {
+    border-color: rgb(255 255 255 / 15%) !important;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #111111; 
+  border-radius: 10px;
+  border: 1px solid #000000;
+}
+::-webkit-scrollbar-thumb {
+  background: rgb(34, 34, 34); 
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(59, 59, 59); 
+}
